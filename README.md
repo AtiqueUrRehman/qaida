@@ -13,7 +13,7 @@ Urdu is a subset of [Arabic](https://en.wikipedia.org/wiki/Arabic) language and 
 It has 39 letters and is written cursively from right to left. Letters within a word are joined to form a sub-word 
 called a ligature. 
 
-###Why we made Qaida
+### Why we made Qaida
 OCR algorithms, have received a significant improvement in performance recently, mainly due to the increase
 in capabilities of artificial intelligence algorithms. However this advancement is not evenly distributed over all 
 languages. Urdu is also among the languages which di not receive much attention, specially in the font independent 
