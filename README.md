@@ -71,7 +71,21 @@ with codecs.open('./data/ligatures_map', encoding='UTF-16LE') as ligature_file:
 
 class_idx = 18313
 ligature = ligatures_map[class_idx]
-
+print(ligature)
 
 >>>  نستعلیق
 ``` 
+
+### Loading data
+- [Colab Notebook](https://colab.research.google.com/drive/140f7rKrcgaT3ga-Zg2BXdCgXj2v2AV2p) for loading and training on 2000 classes [Warning! GPU instance required]
+- [Colab Notebook](https://colab.research.google.com/drive/1OEaZZ13bzB54eaFaw9yvQthuFrDAwa8u) for loading and training on all classes [Warning! TPU instance required]
+
+### Visualization
+
+### Contributing
+ Thanks for your interest in contributing! There are many ways to get involved; start with these [open issues](https://github.com/AtiqueUrRehman/qaida/issues) for specific tasks.
+
+TODO
+- [ ] Add data download and extraction script in ./data/
+- [ ] Add uses for an OCR system e.g pdf converter
+- [ ] Code from loading and training locally
