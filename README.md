@@ -27,3 +27,10 @@ compared to only 52 characters (excluding numbers and punctuations) in English.
 Qaida is an attempt to advance the research in font independent printed Urdu test recognition by creating a large scale 
 public dataset. This dataset, to the best of out knowledge is the only large multi-font Urdu dataset. 
 
+### Get the data
+| Name  | Content | Examples | Classes | Size | Link | MD5 Checksum|
+| --- | --- |--- | --- | --- |--- |--- |
+| `train.tar.xz`        | training set images   |18569  | 3713800   |2.6 GBytes      | [Download](https://drive.google.com/file/d/1ihemYqrIDklByJIxk1tKyxg3cISYQIYQ/view?usp=sharing)|`90ffe6411c5147ecc89764909cc6395a`|
+| `test.tar.xz`         | test set images       |18569  | 1039864   |461 MBytes      | [Download](https://drive.google.com/file/d/1EvM5SqDruOn1RBHf7vFk2ITS3sze90og/view?usp=sharing)|`847a146ecd9fc2db6e62a38eea475db6`|
+| `train_2k.tar.xz`     | training set images   |2000   | 400000    |279 MBytes      | [Download](https://drive.google.com/file/d/1oQk6Hs13JL5OkW2EpS0-zSUAVX7SORzp/view?usp=sharing)|`847a146ecd9fc2db6e62a38eea475db6`|
+| `train_2k.tar.xz`     | test set images       |2000   | 112000    | 79 KBytes      | [Download](https://drive.google.com/file/d/196rEKpsLlNOWCoTQv3TVjTnq8nP0FPXr/view?usp=sharing)|`847a146ecd9fc2db6e62a38eea475db6`|
