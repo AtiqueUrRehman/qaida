@@ -61,7 +61,7 @@ train
 #### Mapping directory/class to ligature 
 Since the ligatures are in unicode format the directory names are kept as unique integers, starting from 0 to 18568.
 The mapping from index to ligature can created using the mapping files present in `./data/ligatures_map` for 18569 class
- and `ligatures_map_2k` for 2000 classes. The files can also be downloaded alongside the data set. The code for reading 
+ and `./data/ligatures_map_2k` for 2000 classes. The files can also be downloaded alongside the data set. The code for reading 
  the mapping is follows:
  
 ```python
@@ -77,10 +77,12 @@ print(ligature)
 ``` 
 
 ### Loading data
-- [Colab Notebook](https://colab.research.google.com/drive/140f7rKrcgaT3ga-Zg2BXdCgXj2v2AV2p) for loading and training on 2000 classes [Warning! GPU instance required]
-- [Colab Notebook](https://colab.research.google.com/drive/1OEaZZ13bzB54eaFaw9yvQthuFrDAwa8u) for loading and training on all classes [Warning! TPU instance required]
+- Pytorch
+    - [Colab Notebook](https://colab.research.google.com/drive/140f7rKrcgaT3ga-Zg2BXdCgXj2v2AV2p) for loading and training on 2000 classes [Warning! GPU instance required]
+    - [Colab Notebook](https://colab.research.google.com/drive/1OEaZZ13bzB54eaFaw9yvQthuFrDAwa8u) for loading and training on all classes [Warning! TPU instance required]
 
 ### Visualization
+
 
 ### Contributing
  Thanks for your interest in contributing! There are many ways to get involved; start with these [open issues](https://github.com/AtiqueUrRehman/qaida/issues) for specific tasks.
@@ -89,3 +91,5 @@ TODO
 - [ ] Add data download and extraction script in ./data/
 - [ ] Add uses for an OCR system e.g pdf converter
 - [ ] Code from loading and training locally
+- [ ] Add visualizations
+- [ ] Add tutorials for Tensorfow and loading data using Hdf5
