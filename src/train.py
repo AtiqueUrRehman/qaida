@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 
 import torch
 import torchvision
@@ -19,6 +20,8 @@ if __name__ == "__main__":
     device = "cuda"
     train_dir = "../data/train_20k"
     test_dir = "../data/test_20k"
+    save_path = "../data/models/iter{}.bin"
+    best_path = "../data/models/best.bin"
 
     model = QRN18(target_classes=target_classes)
     model.double()
@@ -39,12 +42,15 @@ if __name__ == "__main__":
     trainable_parameters = [param for param in model.parameters() if param.requires_grad]
     optimizer = optim.Adam(trainable_parameters, lr=start_lr)
     criterion = nn.CrossEntropyLoss()
+    lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.5)
 
     sys.stdout.flush()
 
-    epochs = 20
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+    epochs = 20
     train_loss = []
+    min_loss = np.inf
 
     for e in range(epochs):
         # Train loss
@@ -62,6 +68,7 @@ if __name__ == "__main__":
             optimizer.step()
         print("Epoch : {}/{}..".format(e + 1, epochs),
               "Training Loss: {:.6f}".format(running_loss / len(train_dataloader)))
+        lr_scheduler.step(running_loss)
         train_loss.append(running_loss)
 
         # Test loss
@@ -77,3 +84,11 @@ if __name__ == "__main__":
 
         print("Epoch : {}/{}..".format(e + 1, epochs),
               "Test Loss: {:.6f}".format(running_loss / len(test_dataloader)))
+
+        torch.save(model.state_dict(), save_path.format(e))
+        if test_loss < min_loss:
+            min_loss = test_loss
+            torch.save(model.state_dict(), best_path)
+            print("Best model save with test loss {}".format(min_loss))
+
+        sys.stdout.flush()
