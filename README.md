@@ -77,9 +77,8 @@ print(ligature)
 >>>  نستعلیق
 ``` 
 
-### Loading data
+### Tutorials
 - Pytorch
-
 
     [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1na46Dw-iZFWTTx9FNKr9eiNhej9TNjRE) for loading and training on first 2000 classes [Warning! GPU instance required]
     
