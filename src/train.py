@@ -11,12 +11,19 @@ from dataset import QaidaDataset
 from torch.utils.data import DataLoader
 from transform import get_transform
 
+
+def get_lr(optimizer):
+    for param_group in optimizer.param_groups:
+        return param_group['lr']
+
+
 if __name__ == "__main__":
     training_epochs = 20
     target_classes = 2000
-    train_batch_size = 256
-    test_batch_size = 256
+    train_batch_size = 512
+    test_batch_size = 512
     start_lr = 0.002
+
     device = "cuda"
     train_dir = "../data/train_20k"
     test_dir = "../data/test_20k"
@@ -48,7 +55,7 @@ if __name__ == "__main__":
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    epochs = 20
+    epochs = 200
     train_loss = []
     min_loss = np.inf
 
@@ -66,10 +73,13 @@ if __name__ == "__main__":
             running_loss += loss
             loss.backward()
             optimizer.step()
+        running_loss /= len(train_dataloader)
+
         print("Epoch : {}/{}..".format(e + 1, epochs),
               "Training Loss: {:.6f}".format(running_loss / len(train_dataloader)))
-        lr_scheduler.step(running_loss)
         train_loss.append(running_loss)
+
+        lr_scheduler.step(running_loss)
 
         # Test loss
         model.eval()
@@ -81,14 +91,16 @@ if __name__ == "__main__":
 
             loss = criterion(pred, lbls)
             test_loss += loss
+        test_loss /= len(test_dataloader)
 
         print("Epoch : {}/{}..".format(e + 1, epochs),
-              "Test Loss: {:.6f}".format(running_loss / len(test_dataloader)))
+              "Test Loss: {:.6f}".format(test_loss))
+        print("Learning after epoch {} is rate {}".format(e + 1, get_lr(optimizer)))
 
         torch.save(model.state_dict(), save_path.format(e))
         if test_loss < min_loss:
             min_loss = test_loss
             torch.save(model.state_dict(), best_path)
-            print("Best model save with test loss {}".format(min_loss))
+            print("Best model saved with test loss {}".format(min_loss))
 
         sys.stdout.flush()
