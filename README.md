@@ -16,16 +16,15 @@ called a ligature.
 ### Why we made Qaida
 OCR algorithms, have received a significant improvement in performance recently, mainly due to the increase
 in capabilities of artificial intelligence algorithms. However this advancement is not evenly distributed over all 
-languages. Urdu is also among the languages which di not receive much attention, specially in the font independent 
+languages. Urdu is also among the languages which did not receive much attention, specially in the font independent 
 perspective.
-One of the main reason for is intra-class variability of the letters in Urdu; unlike English and other Latin based 
+One of the main reason for this, is intra-class variability of the letters in Urdu; unlike English and other Latin based 
 languages, letters in Urdu are not constrained to only a single shape. Their shape changes with their position within
 the ligature. Number of shapes per letter vary from one to four. There are almost [18,569 valid 
 ligatures](http://www.cle.org.pk/software/ling_resources/UrduLigatures.htm) in Urdu which are to be recognized as 
 compared to only 52 characters (excluding numbers and punctuations) in English.
 
-Qaida is an attempt to advance the research in font independent printed Urdu test recognition by creating a large scale 
-public data set. This data set, to the best of out knowledge is the only large multi-font Urdu data set. 
+Qaida is an attempt to advance the research in font independent printed Urdu test recognition.This data set, to the best of out knowledge is the first large scale multi-font data set for Urdu language. 
 
 ### Get the data
 | Name  | Content | Classes | Examples | Size | Link | MD5 Checksum|
@@ -39,7 +38,7 @@ public data set. This data set, to the best of out knowledge is the only large m
 
 
 #### Data format
-The training and test data sets are arranges in the following data structure:
+The training and test data sets are arranged in the following data structure:
 
 ```markdown
 train
@@ -60,9 +59,8 @@ train
 
 #### Mapping directory/class to ligature 
 Since the ligatures are in unicode format the directory names are kept as unique integers, starting from 0 to 18568.
-The mapping from index to ligature can created using the mapping files present in `./data/ligatures_map` for 18569 class
- and `./data/ligatures_map_2k` for 2000 classes. The files can also be downloaded alongside the data set. The code for reading 
- the mapping is follows:
+The mapping from index to ligature can created using the mapping files present in `./data/ligatures_map` for 18569 classes
+ and `./data/ligatures_map_2k` for 2000 classes. These mapping files can be downloaded alongside the data set or can be found in the github repo `\data\`. The code for reading the mapping is follows:
  
 ```python
 import codecs
