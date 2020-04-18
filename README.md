@@ -1,5 +1,5 @@
 # Qaida
-Qaida is a data set of of 18569 ligatures in [Urdu](https://en.wikipedia.org/wiki/Urdu) language synthetically 
+Qaida is a data set of 18569 ligatures in [Urdu](https://en.wikipedia.org/wiki/Urdu) language synthetically 
 generated in 256 different fonts. The data set consists for 3713800 training images and 1039864 test images, each having 80x80 pixels belonging to 18569 ligature classes. Each ligature class in the training data images rendered using 200 unique fonts while the test 
 data contains each class rendered in 56 fonts. Fonts are kept unique across training and test set making it viable for
  a font-independent OCR system.
