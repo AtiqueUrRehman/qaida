@@ -60,7 +60,8 @@ train
 #### Mapping directory/class to ligature 
 Since the ligatures are in unicode format the directory names are kept as unique integers, starting from 0 to 18568.
 The mapping from index to ligature can created using the mapping files present in `./data/ligatures_map` for 18569 classes
- and `./data/ligatures_map_2k` for 2000 classes. These mapping files can be downloaded alongside the data set or can be found in the github repo `\data\`. The code for reading the mapping is follows:
+ and `./data/ligatures_map_2k` for 2000 classes. These mapping files can also be downloaded alongside the data set. 
+ The code for reading the mapping is as follows:
  
 ```python
 import codecs
