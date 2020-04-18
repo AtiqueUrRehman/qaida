@@ -95,8 +95,8 @@ print(ligature)
 ### Contributing
  Thanks for your interest in contributing! There are many ways to get involved; start with these [open issues](https://github.com/AtiqueUrRehman/qaida/issues) for specific tasks.
 
-
-### Contributors 
+---
+### Authors
 - [Sibt Ul Hussain](https://sites.google.com/site/sibtulhussain/) 
 - Atique Ur Rehman
 
