@@ -91,7 +91,12 @@ print(ligature)
     [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/140f7rKrcgaT3ga-Zg2BXdCgXj2v2AV2p) for loading the dataset in tensorflow 2.0 [Warning! GPU instance required]
  
 
-### Visualization
+### Installation
+- Download  and install [anaconda](https://www.anaconda.com/distribution/) for your OS
+- Create the environment using `./qaida_env.yml`
+```
+conda env create -f qaida_env.yml
+```
 
 
 ### Contributing
