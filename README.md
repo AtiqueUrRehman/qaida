@@ -80,7 +80,7 @@ print(ligature)
 - Pytorch
 
 
-    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1na46Dw-iZFWTTx9FNKr9eiNhej9TNjRE) for loading and training on all classes [Warning! GPU instance required]
+    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1na46Dw-iZFWTTx9FNKr9eiNhej9TNjRE) for loading and training on first 2000 classes [Warning! GPU instance required]
     
     
     [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OEaZZ13bzB54eaFaw9yvQthuFrDAwa8u) for loading and training on all classes [Warning! TPU instance required]
@@ -95,6 +95,11 @@ print(ligature)
 
 ### Contributing
  Thanks for your interest in contributing! There are many ways to get involved; start with these [open issues](https://github.com/AtiqueUrRehman/qaida/issues) for specific tasks.
+
+
+### Contributors 
+- [Sibt Ul Hussain](https://sites.google.com/site/sibtulhussain/) 
+- Atique Ur Rehman
 
 TODO
 - [ ] Add data download and extraction script in ./data/
