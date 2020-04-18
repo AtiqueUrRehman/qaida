@@ -1,7 +1,6 @@
 # Qaida
-Qaida is a data set of of 18569 ligatures in [Urdu](https://en.wikipedia.org/wiki/Urdu) language synthetically 
-generated in 256 different fonts. The data set consists for 3713800 training images and 1039864 test images belonging to 
-18569 ligature classes. Each ligature class in the training data images rendered using 200 unique fonts while the test 
+Qaida is a data set of 18569 ligatures in [Urdu](https://en.wikipedia.org/wiki/Urdu) language synthetically 
+generated in 256 different fonts. The data set consists for 3713800 training images and 1039864 test images, each having 80x80 pixels belonging to 18569 ligature classes. Each ligature class in the training data images rendered using 200 unique fonts while the test 
 data contains each class rendered in 56 fonts. Fonts are kept unique across training and test set making it viable for
  a font-independent OCR system.
  
@@ -16,16 +15,15 @@ called a ligature.
 ### Why we made Qaida
 OCR algorithms, have received a significant improvement in performance recently, mainly due to the increase
 in capabilities of artificial intelligence algorithms. However this advancement is not evenly distributed over all 
-languages. Urdu is also among the languages which di not receive much attention, specially in the font independent 
+languages. Urdu is also among the languages which did not receive much attention, specially in the font independent 
 perspective.
-One of the main reason for is intra-class variability of the letters in Urdu; unlike English and other Latin based 
+One of the main reason for this, is intra-class variability of the letters in Urdu; unlike English and other Latin based 
 languages, letters in Urdu are not constrained to only a single shape. Their shape changes with their position within
 the ligature. Number of shapes per letter vary from one to four. There are almost [18,569 valid 
 ligatures](http://www.cle.org.pk/software/ling_resources/UrduLigatures.htm) in Urdu which are to be recognized as 
 compared to only 52 characters (excluding numbers and punctuations) in English.
 
-Qaida is an attempt to advance the research in font independent printed Urdu test recognition by creating a large scale 
-public data set. This data set, to the best of out knowledge is the only large multi-font Urdu data set. 
+Qaida is an attempt to advance the research in font independent printed Urdu test recognition.This data set, to the best of out knowledge is the first large scale multi-font data set for Urdu language. 
 
 ### Get the data
 | Name  | Content | Classes | Examples | Size | Link | MD5 Checksum|
@@ -36,10 +34,13 @@ public data set. This data set, to the best of out knowledge is the only large m
 | `train_2k.tar.xz`     | training set images   |2000   | 400000    |279 MBytes      | [Download](https://drive.google.com/file/d/1oQk6Hs13JL5OkW2EpS0-zSUAVX7SORzp/view?usp=sharing)|`847a146ecd9fc2db6e62a38eea475db6`|
 | `train_2k.tar.xz`     | test set images       |2000   | 112000    | 79 KBytes      | [Download](https://drive.google.com/file/d/196rEKpsLlNOWCoTQv3TVjTnq8nP0FPXr/view?usp=sharing)|`847a146ecd9fc2db6e62a38eea475db6`|
 | `ligature_map_2k`        | index to ligature mapping|2000  | 2000     | 21.3 KBytes      | [Download](https://drive.google.com/file/d/1ZHF2AY_DdDfOr2MKnZAsr_mwk61IYG-E/view?usp=sharing)|`37bbd4e44ae486dbb5d7e98801811ae4`|
+| `train_200.tar.xz`     | training set images   |200   | 40000    |279 MBytes      | [Download](https://drive.google.com/file/d/1Rl5COEQFn0-xN6_LJeSLvyyS9XUMi5Kj/view?usp=sharing)|`a42b6a78a2f73d826b7b8ccbdaf5a60b`|
+| `train_200.tar.xz`     | test set images       |200   | 11200    | 79 KBytes      | [Download](https://drive.google.com/file/d/1RX_462Ecq8Mj2srmdEh2l5-w0hrU7T_o/view?usp=sharing)|`bc0aa5b0307d5a6e122acc2767d25c04`|
+| `ligature_map_200`        | index to ligature mapping|200  | 200     | 21.3 KBytes      | [Download](https://drive.google.com/file/d/1n2Gcv1MUHcxYg0Y2nAIdNh3U7XoSKu8Z/view?usp=sharing)|`d8c38d3398b97549204d5d2c9a8b13ce`|
 
 
 #### Data format
-The training and test data sets are arranges in the following data structure:
+The training and test data sets are arranged in the following data structure:
 
 ```markdown
 train
@@ -60,9 +61,9 @@ train
 
 #### Mapping directory/class to ligature 
 Since the ligatures are in unicode format the directory names are kept as unique integers, starting from 0 to 18568.
-The mapping from index to ligature can created using the mapping files present in `./data/ligatures_map` for 18569 class
- and `./data/ligatures_map_2k` for 2000 classes. The files can also be downloaded alongside the data set. The code for reading 
- the mapping is follows:
+The mapping from index to ligature can created using the mapping files present in `./data/ligatures_map` for 18569 classes
+ and `./data/ligatures_map_2k` for 2000 classes. These mapping files can also be downloaded alongside the data set. 
+ The code for reading the mapping is as follows:
  
 ```python
 import codecs
@@ -80,14 +81,14 @@ print(ligature)
 - Pytorch
 
 
-    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1na46Dw-iZFWTTx9FNKr9eiNhej9TNjRE) for loading and training on all classes [Warning! TPU instance required]
+    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1na46Dw-iZFWTTx9FNKr9eiNhej9TNjRE) for loading and training on first 2000 classes [Warning! GPU instance required]
     
     
     [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OEaZZ13bzB54eaFaw9yvQthuFrDAwa8u) for loading and training on all classes [Warning! TPU instance required]
  
  - Tensorflow
  
-    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/140f7rKrcgaT3ga-Zg2BXdCgXj2v2AV2p) for loading the dataset in tensorflow 2.0
+    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/140f7rKrcgaT3ga-Zg2BXdCgXj2v2AV2p) for loading the dataset in tensorflow 2.0 [Warning! GPU instance required]
  
 
 ### Visualization
@@ -95,6 +96,11 @@ print(ligature)
 
 ### Contributing
  Thanks for your interest in contributing! There are many ways to get involved; start with these [open issues](https://github.com/AtiqueUrRehman/qaida/issues) for specific tasks.
+
+---
+### Authors
+- [Sibt Ul Hussain](https://sites.google.com/site/sibtulhussain/) 
+- Atique Ur Rehman
 
 TODO
 - [ ] Add data download and extraction script in ./data/
