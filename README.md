@@ -1,6 +1,6 @@
 # Qaida
 Qaida is a data set of 18569 ligatures in [Urdu](https://en.wikipedia.org/wiki/Urdu) language synthetically 
-generated in 256 different fonts. The data set consists for 3713800 training images and 1039864 test images, each having 80x80 pixels belonging to 18569 ligature classes. Each ligature class in the training data images rendered using 200 unique fonts while the test 
+generated in 256 different fonts. The data set consist for 3713800 training images and 1039864 test images, each having 80x80 pixels belonging to 18569 ligature classes. Each ligature class in the training data images rendered using 200 unique fonts while the test 
 data contains each class rendered in 56 fonts. Fonts are kept unique across training and test set making it viable for
  a font-independent OCR system.
  
@@ -8,9 +8,7 @@ Here is an example how the data looks (each row represents a different class):
 ![](doc/img/qaida_sprite.png)
 
 ###  Introduction to Urdu Script
-Urdu is a subset of [Arabic](https://en.wikipedia.org/wiki/Arabic) language and is written in a cursive script. 
-It has 39 letters and is written cursively from right to left. Letters within a word are joined to form a sub-word 
-called a ligature. 
+[Urdu](https://en.wikipedia.org/wiki/Urdu) is written in [Arabic script](https://en.wikipedia.org/wiki/Arabic_script) in a cursive format from right to left using an extended Arabi character set. Two or mor characters are joined as a single glymph to form a [ligature](https://en.wikipedia.org/wiki/Orthographic_ligature). There are about 18569 [valid ligatures](http://www.cle.org.pk/software/ling_resources/UrduLigatures.htm) in Urdu. 
 
 ### Why we made Qaida
 OCR algorithms, have received a significant improvement in performance recently, mainly due to the increase
@@ -23,7 +21,7 @@ the ligature. Number of shapes per letter vary from one to four. There are almos
 ligatures](http://www.cle.org.pk/software/ling_resources/UrduLigatures.htm) in Urdu which are to be recognized as 
 compared to only 52 characters (excluding numbers and punctuations) in English.
 
-Qaida is an attempt to advance the research in font independent printed Urdu test recognition.This data set, to the best of out knowledge is the first large scale multi-font data set for Urdu language. 
+Qaida is an attempt to advance the research in font independent printed Urdu test recognition. To the best of our knowledge, this is the first large scale multi-font data set for Urdu language. 
 
 ### Get the data
 | Name  | Content | Classes | Examples | Size | Link | MD5 Checksum|
@@ -104,7 +102,7 @@ conda env create -f qaida_env.yml
 ---
 ### Authors
 - [Sibt Ul Hussain](https://sites.google.com/site/sibtulhussain/) 
-- Atique Ur Rehman
+- [Atique Ur Rehman](https://www.linkedin.com/in/atiqueurrehman/)
 
 TODO
 - [ ] Add data download and extraction script in ./data/
