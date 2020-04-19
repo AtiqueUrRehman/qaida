@@ -101,7 +101,7 @@ conda env create -f qaida_env.yml
 
 ---
 ### Authors
-- [Sibt Ul Hussain](https://sites.google.com/site/sibtulhussain/) 
+- [Sibt Ul Hussain](https://www.linkedin.com/in/sibtulhussain/) 
 - [Atique Ur Rehman](https://www.linkedin.com/in/atiqueurrehman/)
 
 ### License
