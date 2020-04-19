@@ -107,6 +107,7 @@ conda env create -f qaida_env.yml
 ### License
 
 Copyright (c) 2020 Atique Ur Rehman
+
 Data licensed under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/
 
 TODO
