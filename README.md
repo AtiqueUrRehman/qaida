@@ -10,7 +10,7 @@ Here is an example how the data looks (each row represents a different class):
 ###  Urdu Script
 [Urdu](https://en.wikipedia.org/wiki/Urdu) is written in [Arabic script](https://en.wikipedia.org/wiki/Arabic_script) in a cursive format from right to left using an extended Arabic character set. Two or more characters are joined as a single glymph to form a [ligature](https://en.wikipedia.org/wiki/Orthographic_ligature). There are about [18,569 valid ligatures](http://www.cle.org.pk/software/ling_resources/UrduLigatures.htm) in Urdu. 
 
-### Why we made Qaida
+### Why we made Qaida?
 OCR algorithms, have received a significant improvement in performance recently, mainly due to the increase
 in capabilities of artificial intelligence algorithms. However this advancement is not evenly distributed over all 
 languages. Urdu is also among the languages which did not receive much attention, specially in the font independent 
@@ -110,7 +110,7 @@ Copyright (c) 2020 Atique Ur Rehman
 
 Data licensed under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/
 
-TODO
+### TODO
 - [ ] Add data download and extraction script in ./data/
 - [ ] Add uses for an OCR system e.g pdf converter
 - [ ] Code from loading and training locally
