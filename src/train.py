@@ -27,8 +27,8 @@ if __name__ == "__main__":
     device = "cuda"
     train_dir = "../data/train_20k"
     test_dir = "../data/test_20k"
-    save_path = "../data/models/iter{}.bin"
-    best_path = "../data/models/best.bin"
+    save_path = "../data/models/200_iter{}.bin"
+    best_path = "../data/models/200_best.bin"
 
     model = QRN18(target_classes=target_classes)
     model.double()
@@ -37,12 +37,12 @@ if __name__ == "__main__":
     # Lets add some transformation to make our model translation and scale invarient
     to_tensor = torchvision.transforms.ToTensor()
 
-    train_dataset = QaidaDataset(train_dir, transform=get_transform(mode="train"))
+    train_dataset = QaidaDataset(train_dir, transform=get_transform(mode="train"), max_classes = 400)
     # Train dataloader should shuffle images
     train_dataloader = DataLoader(train_dataset, batch_size=train_batch_size, shuffle=True, num_workers=4)
 
     # Test dataset do not need transformations
-    test_dataset = QaidaDataset(test_dir, transform=get_transform(mode="test"))
+    test_dataset = QaidaDataset(test_dir, transform=get_transform(mode="test"), max_classes = 400)
     # Test dataloader should not shuffle images
     test_dataloader = DataLoader(test_dataset, batch_size=test_batch_size, shuffle=False, num_workers=1)
 
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         running_loss /= len(train_dataloader)
 
         print("Epoch : {}/{}..".format(e + 1, epochs),
-              "Training Loss: {:.6f}".format(running_loss / len(train_dataloader)))
+              "Training Loss: {:.6f}".format(running_loss))
         train_loss.append(running_loss)
 
         lr_scheduler.step(running_loss)
