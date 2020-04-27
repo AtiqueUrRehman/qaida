@@ -67,21 +67,21 @@ def test_loop(dataloader, model, criterion, device):
 
 
 if __name__ == "__main__":
-    epochs = 400
+    epochs = 200
     starting_epoch = 0
     target_classes = 2000
-    train_batch_size = 1024
-    test_batch_size = 1024
+    train_batch_size = 512
+    test_batch_size = 512
     start_lr = 0.002
-    weight_decay = 0.07
+    weight_decay = 0.03
 
     device = "cuda"
     train_dir = "../../qaida/data/train_20k"
     test_dir = "../../qaida/data/test_20k"
-    save_path = "../../qaida/data/models/400_scratch_iter_{}.bin"
-    best_path = "../../qaida/data/models/400_scratch_best.bin"
+    save_path = "../../qaida/data/models/2000_scratch_iter_{}.bin"
+    best_path = "../../qaida/data/models/2000_scratch_best.bin"
 
-    model = QRN18(pre_trained=True, backbone="QRN18_400" target_classes=target_classes)
+    model = QRN18(pre_trained = True, backbone="QRN18_400", target_classes=target_classes)
 
     # model.load_state_dict(torch.load("../../qaida/data/models/400_scratch_iter_23.bin"))
 

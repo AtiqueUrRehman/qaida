@@ -6,7 +6,7 @@ import torchvision
 from torch import optim, nn
 from tqdm import tqdm
 
-from model import QRN18
+from models.QRN18 import QRN18
 from dataset import QaidaDataset
 from torch.utils.data import DataLoader
 
@@ -49,8 +49,8 @@ if __name__ == "__main__":
     test_dir = "../../qaida/data/test_20k"
     best_path = "../../qaida/data/400_scratch_best_2.bin"
 
-    model = QRN18(pretrained = False, target_classes=target_classes)
-    model.load_state_dict(torch.load(best_path))
+    model = QRN18(pre_trained = True, backbone="QRN18_400", target_classes=target_classes)
+    #model.load_state_dict(torch.load(best_path))
     model.double()
     model.to(device)
 

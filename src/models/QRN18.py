@@ -12,9 +12,10 @@ class QRN18(nn.Module):
 
         elif backbone == "QRN18_400":
             self._model = torchvision.models.resnet18(pretrained=False)
-            fc = nn.Linear(512, target_classes)
+            fc = nn.Linear(512, 400)
             self._model.fc = fc
-            self._model.load_state_dict(torch.load("../../qaida/data/400_scratch_iter_23.bin"))
+            if pre_trained:
+                self.load_state_dict(torch.load("../../qaida/data/400_scratch_best.bin"))
 
         if freeze_backbone:
             # Freeze all feature extraction layers
@@ -23,7 +24,6 @@ class QRN18(nn.Module):
 
         # Replace the prediction head
         fc = nn.Linear(512, target_classes)
-        fc.requires_grad = True
 
         self._model.fc = fc
         self._model.fc.requires_grad = True
