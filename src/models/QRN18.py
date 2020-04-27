@@ -2,12 +2,13 @@ import torchvision
 from torch import nn
 
 
+# TODO param for backbone type
 class QRN18(nn.Module):
-    def __init__(self, target_classes, pretrained = True):
+    def __init__(self, target_classes, pre_trained=True, freeze_backbone=False):
         super(QRN18, self).__init__()
-        self._model = torchvision.models.resnet18(pretrained=pretrained)
+        self._model = torchvision.models.resnet18(pretrained=pre_trained)
 
-        if pretrained:
+        if freeze_backbone:
             # Freeze all feature extraction layers
             for param in self._model.parameters():
                 param.requires_grad = False

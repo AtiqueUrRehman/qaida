@@ -2,6 +2,11 @@ import torchvision
 
 
 def get_transform(mode):
+    """
+    Return the transforms  ased on mode
+    :param mode: from ["train", "test"]
+    :return:
+    """
     if mode == "train:":
         to_tensor = torchvision.transforms.ToTensor
         affine_transform = torchvision.transforms.RandomAffine(degrees=(0, 0),

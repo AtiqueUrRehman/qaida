@@ -25,7 +25,7 @@ class QaidaDataset(Dataset):
         if max_classes == 0:
             print("Selecting max classes to : {}".format(len(list_cls_dirs)))
 
-        elif max_classes > 0 and max_classes < len(list_cls_dirs):
+        elif 0 < max_classes < len(list_cls_dirs):
             list_cls_dirs = list_cls_dirs[:max_classes]
             print("Selecting max classes to : {}".format(max_classes))
 
