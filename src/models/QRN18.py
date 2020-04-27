@@ -1,12 +1,20 @@
+import torch
 import torchvision
 from torch import nn
 
 
 # TODO param for backbone type
 class QRN18(nn.Module):
-    def __init__(self, target_classes, pre_trained=True, freeze_backbone=False):
+    def __init__(self, target_classes, backbone="resnet18", pre_trained=True, freeze_backbone=False):
         super(QRN18, self).__init__()
-        self._model = torchvision.models.resnet18(pretrained=pre_trained)
+        if backbone == "resnet18":
+            self._model = torchvision.models.resnet18(pretrained=pre_trained)
+
+        elif backbone == "QRN18_400":
+            self._model = torchvision.models.resnet18(pretrained=False)
+            fc = nn.Linear(512, target_classes)
+            self._model.fc = fc
+            self._model.load_state_dict(torch.load("../../qaida/data/400_scratch_iter_23.bin"))
 
         if freeze_backbone:
             # Freeze all feature extraction layers
