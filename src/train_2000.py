@@ -30,7 +30,7 @@ def calculate_accuracy(pred, lbls):
     :param lbls: Tensor [n] where n is the number of samples
     :return:
     """
-    acc = sum(np.argmax(pred.to('cpu'), axis=1) == lbls.to('cpu')) / float(lbls.to('cpu').shape[0])
+    acc = float(sum(np.argmax(pred.to('cpu'), axis=1) == lbls.to('cpu')) / float(lbls.to('cpu').shape[0]))
     return acc
 
 
@@ -57,8 +57,8 @@ def test_loop(dataloader, model, criterion, device):
 
         loss = criterion(pred, lbls)
 
-        total_acc += acc
-        test_loss += loss
+        total_acc += float(acc)
+        test_loss += float(loss)
 
     test_loss /= len(dataloader)
     total_acc /= len(dataloader)
@@ -68,12 +68,12 @@ def test_loop(dataloader, model, criterion, device):
 
 if __name__ == "__main__":
     epochs = 200
-    starting_epoch = 0
     target_classes = 2000
     train_batch_size = 512
     test_batch_size = 512
-    start_lr = 0.002
-    weight_decay = 0.03
+    start_lr = 0.0005
+    weight_decay = 0.01
+    restart_from_epoch  = 0
 
     device = "cuda"
     train_dir = "../../qaida/data/train_20k"
@@ -82,7 +82,10 @@ if __name__ == "__main__":
     best_path = "../../qaida/data/models/2000_scratch_best.bin"
 
     model = QRN18(pre_trained = True, backbone="QRN18_400", target_classes=target_classes)
-
+    
+    if restart_from_epoch:
+        model.load_state_dict(torch.load(save_path.format(restart_from_epoch - 1)))
+        print("Loading state from epoch: {}".format(restart_from_epoch -1))
     # model.load_state_dict(torch.load("../../qaida/data/models/400_scratch_iter_23.bin"))
 
     model.double()
@@ -109,10 +112,9 @@ if __name__ == "__main__":
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    train_loss = []
     min_loss = np.inf
 
-    for e in range(starting_epoch, epochs):
+    for e in range(restart_from_epoch,  epochs):
         # Train loop
         model.train()
         running_loss = 0.0
@@ -127,19 +129,17 @@ if __name__ == "__main__":
             loss = criterion(pred, lbls)
             acc = calculate_accuracy(pred, lbls)
 
-            running_loss += loss
-            running_acc += acc
-
+            running_loss += float(loss)
+            running_acc += float(acc)
             loss.backward()
-            optimizer.step()
-
+            optimizer.step() 
+            
         running_loss /= len(train_dataloader)
         running_acc /= len(train_dataloader)
 
         print("Epoch : {}/{}..".format(e + 1, epochs),
               "Training Loss: {:.6f}".format(running_loss),
               "Training Acc ; {:.6f}".format(running_acc))
-        train_loss.append(running_loss)
 
         lr_scheduler.step(running_loss)
 
@@ -158,7 +158,7 @@ if __name__ == "__main__":
         if test_loss < min_loss:
             min_loss = test_loss
             torch.save(model.state_dict(), best_path)
-            print("Best model saved after {} eoach with test loss {:.6f} and test acc {:.6f}".format(e + 1, min_loss,
+            print("Best model saved after {} epoch with test loss {:.6f} and test acc {:.6f}".format(e + 1, min_loss,
                                                                                                      test_acc))
 
         sys.stdout.flush()
