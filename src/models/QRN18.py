@@ -17,6 +17,13 @@ class QRN18(nn.Module):
             if pre_trained:
                 self.load_state_dict(torch.load("../../qaida/data/400_scratch_best.bin"))
 
+        elif backbone == "QRN18_2000":
+            self._model = torchvision.models.resnet18(pretrained=False)
+            fc = nn.Linear(512, 2000)
+            self._model.fc = fc
+            if pre_trained:
+                self.load_state_dict(torch.load("../../qaida/data/2000_scratch_best.bin"))
+
         if freeze_backbone:
             # Freeze all feature extraction layers
             for param in self._model.parameters():

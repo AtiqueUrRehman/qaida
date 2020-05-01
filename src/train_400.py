@@ -10,61 +10,7 @@ from models.QRN18 import QRN18
 from dataset import QaidaDataset
 from torch.utils.data import DataLoader
 from utils.transform import get_transform
-
-
-def get_lr(optimizer):
-    """
-    Extract and return current learning rate from optimizer param_group
-    :param optimizer: torch.optim
-    :return: learning rate
-    """
-    for param_group in optimizer.param_groups:
-        return param_group['lr']
-
-
-@torch.no_grad()
-def calculate_accuracy(pred, lbls):
-    """
-    Calculate accuracy from the predictions and ground truth labels
-    :param pred: Tensor [n, c] where n is the number of samples and c is the number of classes
-    :param lbls: Tensor [n] where n is the number of samples
-    :return:
-    """
-    acc = sum(np.argmax(pred.to('cpu'), axis=1) == lbls.to('cpu')) / float(lbls.to('cpu').shape[0])
-    return acc
-
-
-@torch.no_grad()
-def test_loop(dataloader, model, criterion, device):
-    """
-    Loop over the dataset in eval mode with no gradients. Calculate criterion and accuracy
-    :param dataloader: Torch Dataloader
-    :param model: Torch.nn.Module
-    :param criterion: Criterion from Torch.nn
-    :param device: from ["cpu", "cuda"]
-    :return: loss and criterion result
-    """
-    model.eval()
-
-    test_loss = 0.0
-    total_acc = 0.0
-
-    for imgs, lbls in tqdm(dataloader):
-        imgs, lbls = imgs.to(device), lbls.to(device)
-
-        pred = model(imgs)
-        acc = calculate_accuracy(pred, lbls)
-
-        loss = criterion(pred, lbls)
-
-        total_acc += acc
-        test_loss += loss
-
-    test_loss /= len(dataloader)
-    total_acc /= len(dataloader)
-
-    return test_loss, total_acc
-
+from utils.framework import test_loop, calculate_accuracy, get_lr
 
 if __name__ == "__main__":
     epochs = 400
@@ -76,12 +22,12 @@ if __name__ == "__main__":
     weight_decay = 0.07
 
     device = "cuda"
-    train_dir = "../../qaida/data/train_20k"
-    test_dir = "../../qaida/data/test_20k"
+    train_dir = "../../qaida/data/train_2k"
+    test_dir = "../../qaida/data/test_2k"
     save_path = "../../qaida/data/models/400_scratch_iter_{}.bin"
     best_path = "../../qaida/data/models/400_scratch_best.bin"
 
-    model = QRN18(pre_trained = True, backbone="resnet18", target_classes=target_classes)
+    model = QRN18(pre_trained=True, backbone="resnet18", target_classes=target_classes)
 
     # model.load_state_dict(torch.load("../../qaida/data/models/400_scratch_iter_23.bin"))
 

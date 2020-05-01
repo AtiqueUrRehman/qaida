@@ -10,25 +10,24 @@ from models.QRN18 import QRN18
 from dataset import QaidaDataset
 from torch.utils.data import DataLoader
 from utils.transform import get_transform
-from utils.transform import get_transform
 from utils.framework import calculate_accuracy, test_loop, get_lr
 
 if __name__ == "__main__":
     epochs = 200
-    target_classes = 2000
+    target_classes = 18569
     train_batch_size = 512
     test_batch_size = 512
-    start_lr = 0.0005
+    start_lr = 0.002
     weight_decay = 0.01
     restart_from_epoch = 0
 
     device = "cuda"
-    train_dir = "../../qaida/data/train_2k"
-    test_dir = "../../qaida/data/test_2k"
-    save_path = "../../qaida/data/models/2000_scratch_iter_{}.bin"
-    best_path = "../../qaida/data/models/2000_scratch_best.bin"
+    train_dir = "../../../Datasets/Qaida/train"
+    test_dir = "../../../Datasets/Qaida/test"
+    save_path = "../../qaida/data/models/18569_scratch_iter_{}.bin"
+    best_path = "../../qaida/data/models/18569_scratch_best.bin"
 
-    model = QRN18(pre_trained=True, backbone="QRN18_400", target_classes=target_classes)
+    model = QRN18(pre_trained=True, backbone="QRN18_2000", target_classes=target_classes)
 
     if restart_from_epoch:
         model.load_state_dict(torch.load(save_path.format(restart_from_epoch - 1)))
