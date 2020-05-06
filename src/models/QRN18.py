@@ -27,7 +27,7 @@ class QRN18(nn.Module):
             if pre_trained:
                 self.load_state_dict(torch.load(model_config["QRN18_2000"]))
 
-        elif backbone == "QRN18_18596":
+        elif backbone == "QRN18_18569":
             self._model = torchvision.models.resnet18(pretrained=False)
             fc = nn.Linear(512, 2000)
             self._model.fc = fc
@@ -57,7 +57,7 @@ class QRN18(nn.Module):
 
         classifier = nn.Sequential(OrderedDict(classifier_layers))
 
-        self._model.fc = fc
+        self._model.fc = classifier
         self._model.fc.requires_grad = True
 
     def forward(self, images):

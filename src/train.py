@@ -14,13 +14,15 @@ from utils.transform import get_transform
 from utils.framework import calculate_accuracy, test_loop, get_lr
 
 
-def get_model(classes, model_config):
+def get_model(classes, fc, model_config):
     if classes == 400:
-        return QRN18(pre_trained=True, backbone="resnet18", num_classes=target_classes, model_config=model_config)
+        return QRN18(pre_trained=True, backbone="resnet18", num_classes=target_classes, model_config=model_config,
+                     fc=fc)
     elif classes == 2000:
-        return QRN18(pre_trained=True, backbone="QRN18_400", num_classes=target_classes, model_config=model_config)
+        return QRN18(pre_trained=True, backbone="QRN18_400", num_classes=target_classes, model_config=model_config,
+                     fc=fc)
     elif classes == 18569:
-        QRN18(pre_trained=True, backbone="QRN18_2000", num_classes=target_classes, model_config=model_config)
+        QRN18(pre_trained=True, backbone="QRN18_18569", num_classes=target_classes, model_config=model_config, fc=fc)
 
 
 if __name__ == "__main__":
@@ -28,22 +30,23 @@ if __name__ == "__main__":
 
     config = parse_config(config_path)
 
-    epochs = config.epochs
-    target_classes = config.target_classes
-    train_batch_size = config.train_batch_size
-    test_batch_size = config.test_batch_size
-    start_lr = config.start_lr
-    weight_decay = config.weight_decay
-    restart_from_epoch = config.restart_from_epoch
+    epochs = config.get("epochs", 200)
+    target_classes = config.get("target_classes")
+    train_batch_size = config.get("train_batch_size")
+    test_batch_size = config.get("test_batch_size")
+    start_lr = config.get("start_lr")
+    weight_decay = config.get("weight_decay")
+    restart_from_epoch = config.get("restart_from_epoch")
+    fc = config.get("fc", [])
 
     device = "cuda"
-    train_dir = config.train_dir
-    test_dir = config.test_dir
+    train_dir = config.get("train_dir")
+    test_dir = config.get("test_dir")
 
-    save_path = config.save_path
-    best_path = config.best_path
+    save_path = config.get("save_path")
+    best_path = config.get("best_path")
 
-    model = get_model(target_classes, config.model_config)
+    model = get_model(target_classes, fc, config.get("model_config"))
 
     if restart_from_epoch:
         model.load_state_dict(torch.load(save_path.format(restart_from_epoch - 1)))

@@ -52,10 +52,6 @@ def get_data_numpy(data_dir, class_list, num_images_per_class=10, randomise=True
     return np_data
 
 
-data, labels = get_data_numpy("./train_20k", [0])
-print(data.shape)
-
-
 def convert_1d_image_to_3d(im, size=(80, 80)):
     im = data[0].reshape(1, *size)
     im = np.concatenate([im, im, im], axis=0)
@@ -113,8 +109,8 @@ def parse_config(config_path):
             data = json.load(f)
 
             # read model config
-            with open(config_path) as f:
-                model_config = json.load(data["model_config"])
+            with open(data["model_config"]) as f:
+                model_config = json.load(f)
             data['model_config'] = model_config
 
             return data
