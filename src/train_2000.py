@@ -28,7 +28,7 @@ if __name__ == "__main__":
     save_path = "../../qaida/data/models/2000_scratch_iter_{}.bin"
     best_path = "../../qaida/data/models/2000_scratch_best.bin"
 
-    model = QRN18(pre_trained=True, backbone="QRN18_400", target_classes=target_classes)
+    model = QRN18(pre_trained=True, backbone="QRN18_400", num_classes=target_classes)
 
     if restart_from_epoch:
         model.load_state_dict(torch.load(save_path.format(restart_from_epoch - 1)))

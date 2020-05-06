@@ -1,4 +1,7 @@
+import json
 import os
+from json import JSONDecodeError
+
 import numpy as np
 
 
@@ -94,3 +97,26 @@ def get_features_from_images(im_data, feature_extractor, target_shape):
         feature_vectors[idx] = feature_extractor.get_features_from_image_np(im_3d)
 
     return feature_vectors
+
+
+def parse_config(config_path):
+    """
+    Parse and return json config file
+    :param config_path: str path of the config file
+    :return: json object with configurations
+    """
+    if not os.path.isfile(config_path):
+        raise Exception("Config file does not exists at {}".format(config_path))
+
+    try:
+        with open(config_path) as f:
+            data = json.load(f)
+
+            # read model config
+            with open(config_path) as f:
+                model_config = json.load(data["model_config"])
+            data['model_config'] = model_config
+
+            return data
+    except JSONDecodeError:
+        raise Exception("Config parse error")

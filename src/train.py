@@ -6,33 +6,48 @@ import torchvision
 from torch import optim, nn
 from tqdm import tqdm
 
+from utils.io import parse_config
 from models.QRN18 import QRN18
 from dataset import QaidaDataset
 from torch.utils.data import DataLoader
 from utils.transform import get_transform
 from utils.framework import calculate_accuracy, test_loop, get_lr
 
+
+def get_model(classes, model_config):
+    if classes == 400:
+        return QRN18(pre_trained=True, backbone="resnet18", num_classes=target_classes, model_config=model_config)
+    elif classes == 2000:
+        return QRN18(pre_trained=True, backbone="QRN18_400", num_classes=target_classes, model_config=model_config)
+    elif classes == 18569:
+        QRN18(pre_trained=True, backbone="QRN18_2000", num_classes=target_classes, model_config=model_config)
+
+
 if __name__ == "__main__":
-    epochs = 200
-    target_classes = 18569
-    train_batch_size = 512
-    test_batch_size = 512
-    start_lr = 0.002
-    weight_decay = 0.01
-    restart_from_epoch = 0
+    config_path = "../data/config/app.json"
+
+    config = parse_config(config_path)
+
+    epochs = config.epochs
+    target_classes = config.target_classes
+    train_batch_size = config.train_batch_size
+    test_batch_size = config.test_batch_size
+    start_lr = config.start_lr
+    weight_decay = config.weight_decay
+    restart_from_epoch = config.restart_from_epoch
 
     device = "cuda"
-    train_dir = "../../../Datasets/Qaida/train"
-    test_dir = "../../../Datasets/Qaida/test"
-    save_path = "../../qaida/data/models/18569_scratch_iter_{}.bin"
-    best_path = "../../qaida/data/models/18569_scratch_best.bin"
+    train_dir = config.train_dir
+    test_dir = config.test_dir
 
-    model = QRN18(pre_trained=True, backbone="QRN18_2000", target_classes=target_classes)
+    save_path = config.save_path
+    best_path = config.best_path
+
+    model = get_model(target_classes, config.model_config)
 
     if restart_from_epoch:
         model.load_state_dict(torch.load(save_path.format(restart_from_epoch - 1)))
         print("Loading state from epoch: {}".format(restart_from_epoch - 1))
-    # model.load_state_dict(torch.load("../../qaida/data/models/400_scratch_iter_23.bin"))
 
     model.double()
     model.to(device)
