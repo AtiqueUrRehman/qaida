@@ -17,12 +17,13 @@ from utils.framework import calculate_accuracy, test_loop, get_lr
 def get_model(classes, fc, model_config):
     if classes == 400:
         return QRN18(pre_trained=True, backbone="resnet18", num_classes=target_classes, model_config=model_config,
-                     fc=fc)
+                     fc_neurons=fc_neurons)
     elif classes == 2000:
         return QRN18(pre_trained=True, backbone="QRN18_400", num_classes=target_classes, model_config=model_config,
-                     fc=fc)
+                     fc_neurons=fc_neurons)
     elif classes == 18569:
-        QRN18(pre_trained=True, backbone="QRN18_18569", num_classes=target_classes, model_config=model_config, fc=fc)
+        return QRN18(pre_trained=True, backbone="QRN18_18569", num_classes=target_classes, model_config=model_config, 
+                     fc_neurons=fc_neurons)
 
 
 if __name__ == "__main__":
@@ -37,7 +38,7 @@ if __name__ == "__main__":
     start_lr = config.get("start_lr")
     weight_decay = config.get("weight_decay")
     restart_from_epoch = config.get("restart_from_epoch")
-    fc = config.get("fc", [])
+    fc_neurons = config.get("fc_neurons", [])
 
     device = "cuda"
     train_dir = config.get("train_dir")
@@ -46,7 +47,9 @@ if __name__ == "__main__":
     save_path = config.get("save_path")
     best_path = config.get("best_path")
 
-    model = get_model(target_classes, fc, config.get("model_config"))
+    model = get_model(target_classes, fc_neurons, config.get("model_config"))
+    print ("Model Created")
+    print (model)
 
     if restart_from_epoch:
         model.load_state_dict(torch.load(save_path.format(restart_from_epoch - 1)))
@@ -93,7 +96,7 @@ if __name__ == "__main__":
             loss = criterion(pred, lbls)
             acc = calculate_accuracy(pred, lbls)
 
-            running_loss += float(loss)
+            running_loss +=  float(loss)
             running_acc += float(acc)
             loss.backward()
             optimizer.step()
