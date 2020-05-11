@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     best_path = config.get("best_path")
 
-    model = QRN18(pre_trained=True, backbone="QRN18_2000", num_classes=target_classes,
+    model = QRN18(pre_trained=True, backbone="QRN18_18569", num_classes=target_classes,
                   model_config=config.get("model_config"),
                   fc_neurons=fc_neurons)
     print("Model Created")
