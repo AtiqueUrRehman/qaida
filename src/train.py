@@ -73,7 +73,7 @@ if __name__ == "__main__":
     trainable_parameters = [param for param in model.parameters() if param.requires_grad]
     optimizer = optim.Adam(trainable_parameters, lr=start_lr, weight_decay=weight_decay)
     criterion = nn.CrossEntropyLoss()
-    lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=10, factor=0.5)
+    lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.5)
 
     sys.stdout.flush()
 
