@@ -17,7 +17,7 @@ class QaidaDataset(Dataset):
 
     def init(self, data_dir, max_classes):
         """
-        Prepare sorted hdf file readers
+        Initialize labels and image_paths based on name of dirs
         """
 
         list_cls_dirs = sorted(os.listdir(data_dir), key=int)
