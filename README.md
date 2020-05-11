@@ -7,6 +7,12 @@ data contains each class rendered in 56 fonts. Fonts are kept unique across trai
 Here is an example how the data looks (each row represents a different class):
 ![](doc/img/qaida_sprite.png)
 
+## Table of contents
+ 1. [Introduction to Urdu Script](#Urdu-Script)
+ 2. [Get the data](#Get-the-data)
+ 3. [Data usage tutorials](#Tutorials)
+ 4. [Pre-trained models](#Using-the-pretrained-model)
+
 ###  Urdu Script
 [Urdu](https://en.wikipedia.org/wiki/Urdu) is written in [Arabic script](https://en.wikipedia.org/wiki/Arabic_script) in a cursive format from right to left using an extended Arabic character set. Two or more characters are joined as a single glymph to form a [ligature](https://en.wikipedia.org/wiki/Orthographic_ligature). There are about [18,569 valid ligatures](http://www.cle.org.pk/software/ling_resources/UrduLigatures.htm) in Urdu. 
 
@@ -23,7 +29,7 @@ compared to only 52 characters (excluding numbers and punctuations) in English.
 
 Qaida is an attempt to advance the research in font independent printed Urdu test recognition. To the best of our knowledge, this is the first large scale multi-font data set for Urdu language. 
 
-### Get the data
+## Get the data
 | Name  | Content | Classes | Examples | Size | Link | MD5 Checksum|
 | --- | --- |--- | --- | --- |--- |--- |
 | `train.tar.xz`        | training set images   |18,569  | 3,713,800   |2.6 GBytes      | [Download](https://drive.google.com/file/d/1ihemYqrIDklByJIxk1tKyxg3cISYQIYQ/view?usp=sharing)|`90ffe6411c5147ecc89764909cc6395a`|
@@ -37,7 +43,7 @@ Qaida is an attempt to advance the research in font independent printed Urdu tes
 | `ligature_map_200`        | index to ligature mapping|200  | 200     | 1.4 KBytes      | [Download](https://drive.google.com/file/d/1n2Gcv1MUHcxYg0Y2nAIdNh3U7XoSKu8Z/view?usp=sharing)|`d8c38d3398b97549204d5d2c9a8b13ce`|
 
 
-#### Data format
+### Data format
 The training and test data sets are arranged in the following data structure:
 
 ```markdown
@@ -57,7 +63,7 @@ train
 
 ```
 
-#### Mapping directory/class to ligature 
+### Mapping directory/class to ligature 
 Since the ligatures are in unicode format the directory names are kept as unique integers, starting from 0 to 18,568.
 The mapping from index to ligature can created using the mapping files present in `./data/ligatures_map` for 18,569 classes
  and `./data/ligatures_map_2k` for 2,000 classes. These mapping files can also be downloaded alongside the data set. 
@@ -75,7 +81,7 @@ print(ligature)
 >>>  نستعلیق
 ``` 
 
-### Tutorials
+## Tutorials
 - Pytorch
 
     [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1na46Dw-iZFWTTx9FNKr9eiNhej9TNjRE) for loading and training on first 2,000 classes [Warning! GPU instance required]
@@ -88,15 +94,34 @@ print(ligature)
     [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/140f7rKrcgaT3ga-Zg2BXdCgXj2v2AV2p) for loading the dataset in tensorflow 2.0 [Warning! GPU instance required]
  
 
-### Installation
+## Using the pretrained model
 - Download  and install [anaconda](https://www.anaconda.com/distribution/) for your OS
 - Create the environment using `./qaida_env.yml`
 ```
 conda env create -f qaida_env.yml
 ```
+- Activate the environment using
+```
+conda activate qaida_env
+```
+- Download the pre-trained models using the download script
+```
+cd ./src
+bash src/download_models.sh
+cd .. 
+```
+- Open Jupyter notebook using 
+```
+jupyter notebook
+```
+- Open `src/Inspect_trained_model.ipynb` to see the example usage of pre-trained model
 
+### Models Stats
+| Name  | Backbone | Seen (200) fonts Accuracy | Unseen (56) fonts Accuracy | Size | Link | MD5 Checksum|
+| --- | --- |--- | --- | --- |--- |--- |
+| `QRN18`   | ResNet18   |84.2  | 75.5   |165 MBytes      | [Download](https://drive.google.com/file/d/1kCOB_xrEbnr8JzAhWuskL2h0J81Hn8Ec/view?usp=sharing)|`b64e527360d21f55d35f0c684d6cad06`|
 
-### Contributing
+## Contributing
  Thanks for your interest in contributing! There are many ways to get involved; start with these [open issues](https://github.com/AtiqueUrRehman/qaida/issues) for specific tasks.
 
 ---
@@ -110,9 +135,5 @@ Copyright (c) 2020 Atique Ur Rehman
 
 Data licensed under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/
 
-### TODO
-- [ ] Add data download and extraction script in ./data/
-- [ ] Add uses for an OCR system e.g pdf converter
-- [ ] Code from loading and training locally
-- [ ] Add visualizations
-- [ ] Add tutorials for Tensorfow and loading data using Hdf5
+#### TODO
+- End to end training tutorial
