@@ -17,7 +17,7 @@ class QRN18(nn.Module):
         :param freeze_backbone: weather to freeze all the layers from backbone
         :param fc_neurons: number of fully-connected neurons in each fully-connected layer to be added.
         """
-
+        super(QRN18, self).__init__()
         self.load_backbone(backbone, pre_trained, model_config)
 
         if freeze_backbone:
@@ -54,7 +54,6 @@ class QRN18(nn.Module):
         :param model_config:
         :return:
         """
-        super(QRN18, self).__init__()
         if backbone == "resnet18":
             self._model = torchvision.models.resnet18(pretrained=pre_trained)
 
