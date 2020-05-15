@@ -128,5 +128,3 @@ dependencies:
     - psutil==5.7.0
     - pympler==0.8
     - pytz==2020.1
-prefix: /home/research/anaconda3/envs/qaida_env
-
