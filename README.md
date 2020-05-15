@@ -124,6 +124,24 @@ jupyter notebook
 ## Contributing
  Thanks for your interest in contributing! There are many ways to get involved; start with these [open issues](https://github.com/AtiqueUrRehman/qaida/issues) for specific tasks.
 
+## Citing Qaida
+If you use Qaida dataset, trained models, or code repository in your research we would appriciate refrences to the following paper:
+
+**Large Scale Font Independent Urdu Text Recognition System. [arXiv:2005.06752](https://arxiv.org/abs/2005.06752)**
+
+Biblatex entry:
+```
+@misc{rehman2020large,
+    title={Large Scale Font Independent Urdu Text Recognition System},
+    author={Atique Ur Rehman and Sibt Ul Hussain},
+    year={2020},
+    eprint={2005.06752},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+```
+
+
 ---
 ### Authors
 - [Sibt Ul Hussain](https://www.linkedin.com/in/sibtulhussain/) 
@@ -137,4 +155,3 @@ Data licensed under CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/
 
 #### TODO
 - End to end training tutorial
-- Add dataset usage with trained model
